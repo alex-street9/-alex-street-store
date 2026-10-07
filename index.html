@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alex Street Store</title>
+<meta name="description" content="Alex Street Store - Resources para MTA: San Andreas">
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#05070d;color:#fff}
+:root{--blue:#168cff;--blue2:#00c8ff;--card:#0b101b;--muted:#9aa8bd}
+header{position:sticky;top:0;z-index:10;background:rgba(5,7,13,.94);border-bottom:1px solid #162238;backdrop-filter:blur(10px)}
+.nav{max-width:1150px;margin:auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.logo{font-weight:900;font-size:22px;letter-spacing:1px}.logo span{color:var(--blue2)}
+nav a{color:#c9d4e6;text-decoration:none;margin-left:18px;font-weight:700;font-size:14px}.cartbtn,.primary{border:0;background:linear-gradient(135deg,var(--blue),var(--blue2));color:white;padding:11px 16px;border-radius:10px;font-weight:900;cursor:pointer}
+.hero{max-width:1150px;margin:auto;padding:80px 20px 55px;text-align:center}
+.badge{display:inline-block;padding:7px 12px;border:1px solid #1b78c9;border-radius:999px;color:#7fdcff;background:#071525;font-size:12px;font-weight:900}
+h1{font-size:clamp(38px,7vw,76px);margin:18px 0 10px;line-height:.95}h1 span{color:var(--blue2);text-shadow:0 0 25px #008cff66}
+.hero p{max-width:680px;margin:0 auto 25px;color:var(--muted);font-size:17px;line-height:1.6}
+.section{max-width:1150px;margin:auto;padding:35px 20px}.section h2{font-size:30px;margin:0 0 18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.card{background:linear-gradient(180deg,#0d1421,#080c14);border:1px solid #17263b;border-radius:16px;padding:18px;box-shadow:0 10px 30px #0005}
+.icon{height:120px;border-radius:12px;background:radial-gradient(circle at 50% 40%,#123f6d,#070b13 65%);display:grid;place-items:center;font-size:46px;margin-bottom:15px}
+.card h3{margin:6px 0 7px}.desc{color:var(--muted);font-size:13px;line-height:1.5;min-height:40px}.price{font-size:21px;font-weight:900;margin:13px 0}.price small{font-size:12px;color:var(--muted)}
+footer{border-top:1px solid #172238;margin-top:50px;padding:30px 20px;text-align:center;color:var(--muted)}
+.modal{display:none;position:fixed;inset:0;background:#000b;z-index:30;padding:20px;align-items:center;justify-content:center}.modal.show{display:flex}
+.box{width:min(560px,100%);max-height:90vh;overflow:auto;background:#0b111c;border:1px solid #203451;border-radius:18px;padding:22px;box-shadow:0 20px 70px #000}
+.row{display:flex;justify-content:space-between;gap:12px;align-items:center;border-bottom:1px solid #1a2739;padding:12px 0}.row button{background:#151f2e;color:#fff;border:1px solid #2a3b54;border-radius:8px;padding:7px 10px;cursor:pointer}
+input,select{width:100%;padding:12px;border-radius:10px;border:1px solid #263850;background:#070b12;color:#fff;margin:6px 0 12px}
+.close{float:right;background:none;border:0;color:#fff;font-size:25px;cursor:pointer}.total{font-size:22px;font-weight:900;margin:18px 0}
+.note{font-size:12px;color:#8392a7;line-height:1.5}
+@media(max-width:700px){nav a{display:none}.hero{padding-top:55px}.nav{padding:12px 14px}}
+</style>
+</head>
+<body>
+<header><div class="nav">
+<div class="logo">ALEX <span>STREET STORE</span></div>
+<nav><a href="#inicio">Inicio</a><a href="#resources">Resources</a><a href="#como">Cómo comprar</a></nav>
+<button class="cartbtn" onclick="openCart()">🛒 Carrito (<span id="count">0</span>)</button>
+</div></header>
+
+<main>
+<section class="hero" id="inicio">
+<span class="badge">MTA: SAN ANDREAS • RESOURCES</span>
+<h1>ALEX <span>STREET</span><br>STORE</h1>
+<p>Resources, scripts y sistemas para llevar tu servidor de MTA al siguiente nivel.</p>
+<a class="primary" href="#resources" style="display:inline-block;text-decoration:none">VER RESOURCES</a>
+</section>
+
+<section class="section" id="resources">
+<h2>🔥 Resources destacados</h2>
+<div class="grid" id="products"></div>
+</section>
+
+<section class="section" id="como">
+<h2>🛒 ¿Cómo comprar?</h2>
+<div class="grid">
+<div class="card"><div class="icon">1️⃣</div><h3>Elige tu resource</h3><div class="desc">Agrega al carrito los recursos que quieres comprar.</div></div>
+<div class="card"><div class="icon">2️⃣</div><h3>Envía el pedido</h3><div class="desc">Completa tus datos y envía el pedido directamente por WhatsApp.</div></div>
+<div class="card"><div class="icon">3️⃣</div><h3>Recibe tu resource</h3><div class="desc">Por ahora la entrega se realiza manualmente después de confirmar el pago.</div></div>
+</div>
+</section>
+</main>
+
+<footer>
+<strong>ALEX STREET STORE</strong><br>
+Resources para MTA: San Andreas<br><br>
+WhatsApp: +1 829-902-1683<br>
+<span class="note">Versión gratuita inicial. No necesitas pagar hosting ni dominio para comenzar.</span>
+</footer>
+
+<div class="modal" id="cartModal"><div class="box">
+<button class="close" onclick="closeCart()">×</button><h2>🛒 Tu carrito</h2>
+<div id="cart"></div>
+<div class="total">Total: RD$ <span id="total">0</span></div>
+<label>Tu nombre</label><input id="name" placeholder="Nombre">
+<label>Tu correo</label><input id="email" type="email" placeholder="correo@ejemplo.com">
+<button class="primary" style="width:100%" onclick="sendOrder()">Enviar pedido por WhatsApp</button>
+<p class="note">Este sistema gratuito no cobra automáticamente. Primero envías el pedido por WhatsApp y luego coordinamos el pago y la entrega.</p>
+</div></div>
+
+<script>
+const products=[
+{id:1,name:"Sistema de Login",price:1200,icon:"🔐",desc:"Login, registro y gestión básica de cuentas para MTA."},
+{id:2,name:"HUD Moderno",price:800,icon:"🖥️",desc:"HUD moderno para mejorar la interfaz de tu servidor."},
+{id:3,name:"Sistema de Trabajos",price:1500,icon:"🚕",desc:"Sistema base de trabajos para servidor RP."},
+{id:4,name:"Pack Policía RP",price:2200,icon:"🚔",desc:"Pack de funciones y elementos para facción policial."},
+{id:5,name:"Sistema de Inventario",price:1800,icon:"🎒",desc:"Inventario visual para administrar objetos y recursos."},
+{id:6,name:"Pack Starter",price:3500,icon:"📦",desc:"Paquete inicial con varios recursos para comenzar tu servidor."}
+];
+let cart=JSON.parse(localStorage.getItem("alex_cart")||"[]");
+const money=n=>new Intl.NumberFormat("es-DO").format(n);
+function renderProducts(){document.getElementById("products").innerHTML=products.map(p=>`
+<div class="card"><div class="icon">${p.icon}</div><h3>${p.name}</h3><div class="desc">${p.desc}</div>
+<div class="price">RD$ ${money(p.price)} <small>pago único</small></div>
+<button class="primary" onclick="add(${p.id})">Agregar al carrito</button></div>`).join("")}
+function add(id){cart.push(id);save();openCart()}
+function save(){localStorage.setItem("alex_cart",JSON.stringify(cart));document.getElementById("count").textContent=cart.length}
+function openCart(){renderCart();document.getElementById("cartModal").classList.add("show")}
+function closeCart(){document.getElementById("cartModal").classList.remove("show")}
+function renderCart(){
+let box=document.getElementById("cart"); if(!cart.length){box.innerHTML="<p class='note'>Tu carrito está vacío.</p>";document.getElementById("total").textContent="0";return}
+let total=0; box.innerHTML=cart.map((id,i)=>{let p=products.find(x=>x.id===id);total+=p.price;return `<div class="row"><span>${p.icon} ${p.name}<br><small>RD$ ${money(p.price)}</small></span><button onclick="removeItem(${i})">Eliminar</button></div>`}).join("");
+document.getElementById("total").textContent=money(total)
+}
+function removeItem(i){cart.splice(i,1);save();renderCart()}
+function sendOrder(){
+if(!cart.length)return alert("Agrega al menos un resource.");
+let name=document.getElementById("name").value.trim()||"Cliente";
+let email=document.getElementById("email").value.trim()||"No indicado";
+let items=cart.map(id=>products.find(p=>p.id===id));
+let total=items.reduce((s,p)=>s+p.price,0);
+let text=`Hola Alex Street Store 👋%0A%0AQuiero comprar:%0A${items.map(p=>"• "+p.name+" - RD$ "+money(p.price)).join("%0A")}%0A%0ATotal: RD$ ${money(total)}%0ANombre: ${encodeURIComponent(name)}%0ACorreo: ${encodeURIComponent(email)}%0A%0AQuedo atento para coordinar el pago y la entrega.`;
+window.open("https://wa.me/18299021683?text="+text,"_blank");
+}
+renderProducts();save();
+</script>
+</body>
+</html>
